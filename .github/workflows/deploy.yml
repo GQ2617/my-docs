@@ -1,40 +1,50 @@
 name: Deploy VitePress to GitHub Pages
 
-# 触发条件：推送到 main 分支时执行
+# 触发条件：推送到 main 分支，或手动触发
 on:
   push:
     branches: [main]
+  workflow_dispatch: # 新增：允许手动触发，方便测试
 
-# 执行任务
 jobs:
   deploy:
-    runs-on: ubuntu-latest # 运行环境
+    runs-on: ubuntu-latest
+    permissions: # 核心：显式声明权限，解决 token 权限不足问题
+      contents: write # 必须！授予读写仓库内容的权限
+      pages: write
+      id-token: write
+
     steps:
-      # 步骤1：拉取代码
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # 拉取所有历史提交（避免构建出错）
+          fetch-depth: 0 # 拉取所有提交记录
+          persist-credentials: false # 避免凭证冲突
 
-      # 步骤2：安装 Node.js
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20 # 推荐使用 Node.js 20+（VitePress 要求）
-          cache: 'npm' # 缓存 npm 依赖，加速构建
+          node-version: '20.x'
+          cache: 'npm'
 
-      # 步骤3：安装依赖
       - name: Install dependencies
-        run: npm install
+        run: |
+          npm cache clean --force
+          npm install --force
 
-      # 步骤4：构建静态文件
       - name: Build VitePress site
         run: npm run docs:build
 
-      # 步骤5：部署到 GitHub Pages
+      - name: Configure Git # 新增：配置 git 用户名和邮箱，避免推送时身份验证失败
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }} # GitHub 自动生成的令牌，无需手动配置
-          publish_dir: ./docs/.vitepress/dist # 静态文件输出目录（VitePress 构建后默认路径）
-          publish_branch: gh-pages # 部署到 gh-pages 分支（GitHub Pages 专用分支）
+          personal_token: ${{ secrets.GITHUB_TOKEN }} # 替换为 personal_token（兼容新版）
+          publish_dir: ./docs/.vitepress/dist
+          publish_branch: gh-pages
+          force_orphan: true # 强制创建孤立分支，避免冲突
+          commit_message: "docs: deploy ${{ github.sha }}" # 明确提交信息
