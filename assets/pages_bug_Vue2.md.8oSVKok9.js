@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.CoYFNnIO.js";const i=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"pages/bug/Vue2.md","filePath":"pages/bug/Vue2.md"}'),s={name:"pages/bug/Vue2.md"};function r(o,c,n,p,u,_){return a(),t("div")}const m=e(s,[["render",r]]);export{i as __pageData,m as default};

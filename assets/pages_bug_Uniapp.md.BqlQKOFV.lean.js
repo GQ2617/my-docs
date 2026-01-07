@@ -1,0 +1,1 @@
+import{_ as e,c as a,o as t}from"./chunks/framework.CoYFNnIO.js";const m=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"pages/bug/Uniapp.md","filePath":"pages/bug/Uniapp.md"}'),p={name:"pages/bug/Uniapp.md"};function n(s,r,o,c,i,_){return t(),a("div")}const f=e(p,[["render",n]]);export{m as __pageData,f as default};

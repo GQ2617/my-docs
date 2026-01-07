@@ -1,0 +1,1 @@
+import{_ as e,c as t,o as a}from"./chunks/framework.CoYFNnIO.js";const i=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"pages/component/Vue3.md","filePath":"pages/component/Vue3.md"}'),o={name:"pages/component/Vue3.md"};function n(s,c,r,p,m,_){return a(),t("div")}const f=e(o,[["render",n]]);export{i as __pageData,f as default};

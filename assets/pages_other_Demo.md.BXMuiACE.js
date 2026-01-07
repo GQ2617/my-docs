@@ -1,0 +1,1 @@
+import{_ as e,c as t,o}from"./chunks/framework.CoYFNnIO.js";const i=JSON.parse('{"title":"","description":"","frontmatter":{},"headers":[],"relativePath":"pages/other/Demo.md","filePath":"pages/other/Demo.md"}'),a={name:"pages/other/Demo.md"};function r(s,c,n,p,m,_){return o(),t("div")}const f=e(a,[["render",r]]);export{i as __pageData,f as default};
