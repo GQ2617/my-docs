@@ -93,7 +93,7 @@ export default defineConfig({
       options: {
         locales: {
           // 配置中文搜索
-          'zh-CN': {
+          'zh': {
             translations: {
               button: {
                 buttonText: '搜索文档',
